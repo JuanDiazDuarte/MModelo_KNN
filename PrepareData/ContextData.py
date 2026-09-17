@@ -11,11 +11,11 @@ def SetHeaders():
     try:
 
         columns = ["Motor", "ID",
-                   "Alineacion Eje", "Demanda", "Temp Entrada", "Temp Devanados", "Temp Carcasa",
-                   "Temp Rodamiento", "Presion Producto", "Presion Lubricante", "Voltaje L1", "Velocidad Campo",
-                   "Velocida Campo", "Sobrecarga", "Vibracion", "Voltaje L2", "Velocidad Estimada", 
-                   "Par", "Relacion Deslizamiento", "Desvalance Fases", "Flujo Masico", "Velocidad Consigna", "% Consigna Velocidad"
-                   "Flujo Entrada Refrigerante", "Flujo Salida Refrigerante"]
+                   "Alineacion Acoplamiento", "% Demanda", "Voltaje L1", "Revoluciones a 125%", "Revoluciones a 75%",
+                   "Revoluciones a 100%", "Temp a 0%", "Temp 25%", "Voltaje L2", "Revoluciones a 50%",
+                   "Revoluciones 150 %", "Presion Lubricante", "Temperatura 100%", "Voltaje L3", "Revoluciones 25%", "Revoluciones 0%", 
+                   "Vibracion", "Alineacion Eje ", "Flujo de Lubricante", "Flujo de Producto", "% de Torque",
+                   "Temperatura 75%", "Temperatura 50%"]
 
         dataTable = pan.read_csv("Resources/train_FD001.txt", sep=r"\s+", header=None, names=columns)
 
@@ -23,7 +23,7 @@ def SetHeaders():
 
         print(dataTable)
         
-    except Exception as xe:
+    except Exception as ex:
         print(f"Exception in SetHeaders: {ex}")
 
 def InitialAnalisis():

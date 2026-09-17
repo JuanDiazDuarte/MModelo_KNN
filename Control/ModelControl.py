@@ -7,8 +7,8 @@ def StartProcess():
         print("Starting Process...")
         CreateHeaders()
 
-    except NameError as ne:
-        print("Exception in :" + ne)
+    except Exception as ex:
+        print(f"Exception in : {ex}")
 
 
 def CreateHeaders():
