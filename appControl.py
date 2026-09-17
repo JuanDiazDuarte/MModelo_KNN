@@ -1,4 +1,4 @@
-from Control import StartProcess
+from A_Control import StartProcess
 
 def appControl():
     print("Inicia AppControl")
