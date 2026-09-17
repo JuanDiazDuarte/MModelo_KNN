@@ -5,7 +5,7 @@ from Modelos import Model as mod
 
 #endregion
 
-#region Declaracion de Variables
+#region Acondicionar Base de Datos
 
 def SetHeaders():
 
@@ -18,10 +18,10 @@ def SetHeaders():
                    "Flujo de Producto en Descarga", "Vibracion", "Alineacion Eje", "Flujo de Aire de Enfriamiento", "Set Point Revolucion",
                     "% de Torque", "Flujo de Entrada de Refrigerante", "Flujo de Salida de Refrigerante"]
 
-        mod.MOTORES_DB = pan.read_csv("Resources/train_FD001.txt", sep=r"\s+", header=None, names=columns, skipinitialspace = True)
+        mod.FULL_DATA_DB = pan.read_csv("Resources/train_FD001.txt", sep=r"\s+", header=None, names=columns, skipinitialspace = True)
         GetRUL()
 
-        print(mod.MOTORES_DB[["Motor", "Ciclo", "RUL"]])
+        #print(mod.FULL_DATA_DB[["Motor", "Ciclo", "RUL"]])
         
     except Exception as ex:
         print(f"Exception in SetHeaders: {ex}")
@@ -30,11 +30,15 @@ def GetRUL():
 
     try:
 
-        max_cycles = mod.MOTORES_DB.groupby("Motor")["Ciclo"].transform("max")
-        mod.MOTORES_DB["RUL"] = max_cycles - mod.MOTORES_DB["Ciclo"]
+        max_cycles = mod.FULL_DATA_DB.groupby("Motor")["Ciclo"].transform("max")
+        mod.FULL_DATA_DB["RUL"] = max_cycles - mod.FULL_DATA_DB["Ciclo"]
 
     except Exception as ex:
         print(f"Exception in GetRUL: {ex}")
+
+#endregion
+
+#region Analisis
 
 def InitialAnalisis():
     

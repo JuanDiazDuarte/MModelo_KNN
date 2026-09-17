@@ -1,4 +1,5 @@
 from B_PrepareData import ContextData as conDat
+from C_LimpiezaDatos import CleanData as clnDat
 
 def StartProcess():
 
@@ -6,6 +7,7 @@ def StartProcess():
 
         print("Starting Process...")
         CreateHeaders()
+        CleanData()
 
     except Exception as ex:
         print(f"Exception in : {ex}")
@@ -17,3 +19,4 @@ def CreateHeaders():
 
 def CleanData():
     print("Fix Data Process starting...")
+    clnDat.DataDiagnostics()
