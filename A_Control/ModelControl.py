@@ -20,3 +20,4 @@ def CreateHeaders():
 def CleanData():
     print("Fix Data Process starting...")
     clnDat.DataDiagnostics()
+    clnDat.CleanDB()
