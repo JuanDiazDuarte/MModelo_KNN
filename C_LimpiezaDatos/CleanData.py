@@ -6,6 +6,10 @@
 import pandas as pan
 import numpy as nup
 
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsRegressor
+
 #endregion
 
 #region Importaciones de Proyecto
@@ -58,6 +62,8 @@ def DataDiagnostics():
 
 def CleanDB():
 
+    varColumns = []
+
     try:
 
         print("\nStarting CleanDB...\n")
@@ -80,7 +86,7 @@ def CleanDB():
 
         #region 2.- Definicion del objetivo Analitico
 
-        mod.Y_COLUMN = mod.FULL_DATA_DB["RUL"]
+        mod.Y_TARGET = mod.FULL_DATA_DB["RUL"]
         mod.X_DATA = mod.FULL_DATA_DB.drop(columns=["Motor", "Ciclo", "RUL"])
 
         #endregion
@@ -114,14 +120,26 @@ def CleanDB():
 
         #region 4.- Eliminar Variables con Varianza Cercana a 0
 
-        
-
-        #endregion
-
-        #region 5.- Normalizar Variables
+        zeroVarColumns = [varColumn for varColumn in mod.X_DATA if mod.X_DATA[varColumn].std() <0.001]
+        mod.X_DATA = mod.X_DATA.drop(columns=zeroVarColumns)
 
         #endregion
 
 
     except Exception as ex:
         print(f"Exception in CleanDB: {ex}")
+
+def SetDataTraining():
+
+    try:
+
+        xDataTrain, xDataTest, mod.Y_DATA_TRAIN, mod.Y_DATA_TEST = train_test_split(mod.X_DATA, mod.Y_TARGET, test_size=mod.TEST_SIZE, random_state=mod.RAN_STATE)
+
+        scale = StandardScaler()
+        mod.DATA_TRAIN = scale.fit_transform(xDataTrain)
+
+        mod.DATA_TEST = scale.transform(xDataTest)
+        
+    except Exception as ex:
+        print(f"Exception in SetDataTraining: {ex}")
+

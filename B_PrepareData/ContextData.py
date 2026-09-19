@@ -11,6 +11,10 @@ def SetHeaders():
 
     try:
 
+        """
+        Variable a Predecie es la Temperatura Devanados
+        
+        """
         columns = ["Motor", "Ciclo", 
                    "Alineacion Tuberias", "Alineacion Acoplamiento", "% Demanda", "Voltaje Linea 1", "Horas de Operacion", "Presion Succion",
                    "Presion Descarga", "Temperatura Acoplamiento", "Temperatura Carcaza", "Voltaje Linea 2", "Revoluciones Acoplamiento",
